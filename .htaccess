@@ -1,0 +1,34 @@
+# ---------------------------------------
+# STOP SEARCH ENGINES FROM INDEXING
+# ---------------------------------------
+<IfModule mod_headers.c>
+    Header set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet"
+</IfModule>
+
+# ---------------------------------------
+# DISABLE DIRECTORY LISTING
+# ---------------------------------------
+Options -Indexes
+
+# ---------------------------------------
+# PREVENT ACCESS TO SENSITIVE FILES
+# ---------------------------------------
+<FilesMatch "^(\.htaccess|\.htpasswd|\.env|composer\.json|composer\.lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ---------------------------------------
+# OPTIONAL: FORCE HTTPS (RECOMMENDED)
+# ---------------------------------------
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/p/([0-9]+)$ single-product.php?category=$1&product=$2&id=$3 [L,QSA]
