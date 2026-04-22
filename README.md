@@ -54,7 +54,7 @@ This project is a dynamic business website developed for an optical instruments 
 ---
 
 ## ⚠️ Note  
-- This is a demo project with sample data  
+- This is a live project currently hosted on a subdomain for demonstration and testing purposes. 
 - Configure email using environment variable (`ADMIN_EMAIL`)  
 
 ---
